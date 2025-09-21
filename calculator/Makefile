@@ -1,34 +1,23 @@
-# Компилятор и флаги
+#Компилятор и флаги
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11 -O2
-
-# Имя исполняемого файла
+#Имя исполняемого файла
 TARGET = calculator
-
-# Исходные файлы
+#исходные файлы
 SRCS = main.cpp calculator.cpp
 OBJS = $(SRCS:.cpp=.o)
-
-# Правило по умолчанию
+#Правило по умолчанию
 all: $(TARGET)
-
-# Сборка исполняемого файла
+#Сборка исполняемого файла
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-# Компиляция .cpp файлов в .o файлы
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+#Компилятор .cpp файлов в .o файлы
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Очистка
+#Очистка
 clean:
 	rm -f $(OBJS) $(TARGET)
-
-# Пересборка
+#Пересборка
 rebuild: clean all
 
-# Установка (если нужно)
-install: $(TARGET)
-	cp $(TARGET) /usr/local/bin/
-
-.PHONY: all clean rebuild install
+.PHONY: all clean rebuild
